@@ -33,7 +33,7 @@ class TaiwaneseNewsParser::Parser::Cna < TaiwaneseNewsParser::Parser
 
   def parse_reporter_name
     text = @doc.css('.news_content .box_2').text
-    text = text[/（中央社(.*?)\d{1,2}日電）/,1]
+    text = text[/（中央社(.*?)\d{1,2}日/,1]
     cities = %w{台北 新北 台中 台南 高雄 基隆 新竹 嘉義 桃園 新竹 苗栗 彰化 南投 雲林 嘉義 屏東 宜蘭 花蓮 台東 澎湖 金門 連江}
     cities.find do |city|
       text.gsub!(/#{city}(?:縣市)?$/,'')
