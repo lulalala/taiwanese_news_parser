@@ -15,7 +15,7 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
   #url = 'http://www.libertytimes.com.tw/2013/new/apr/13/today-sp2.htm'
   def parse
     # new layout uses utf-8
-    @article[:title] = @doc.at_css('#newsti').text
+    @article[:title] = @doc.at_css('#newsti text()').text
     @article[:company_name] = '自由時報'
     @article[:content] = @doc.css('#newsc.news_content').text
 
