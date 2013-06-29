@@ -3,6 +3,11 @@ class TaiwaneseNewsParser::Parser::Cna < TaiwaneseNewsParser::Parser
     'cna.com.tw'
   end
 
+  def set_doc(url)
+    @raw = open(url).read
+    @doc = Nokogiri::HTML(@raw)
+  end
+
   #url = 'http://www.cna.com.tw/News/aSaM/201304120296-1.aspx'
   def parse
     @article[:title] = @doc.at_css('.news_content h1').text
@@ -19,7 +24,6 @@ class TaiwaneseNewsParser::Parser::Cna < TaiwaneseNewsParser::Parser
     date[1] = match[2]
     date[2] = match[3]
     date_string = date.join('/') + ' ' + @doc.css('.date').text
-    Rails.logger.debug date_string
     @article[:published_at] = Time.parse(date_string)
 
     clean_up

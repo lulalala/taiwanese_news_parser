@@ -3,7 +3,7 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
     'appledaily.com.tw'
   end
 
-  def set_doc
+  def set_doc(url)
     @raw = open(url).read
     @doc = Nokogiri::HTML(@raw)
   end
