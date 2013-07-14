@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe TaiwaneseNewsParser::Parser::LibertyTimes do
   describe '#parse' do
+    before do
+      Timecop.freeze(Time.local(2013,6,29,9,13))
+    end
     it do
       url = 'http://iservice.libertytimes.com.tw/liveNews/news.php?no=829851&type=%E7%A4%BE%E6%9C%83&Slots=Live'
       FakeWeb.register_uri(:get, url, body:sample(__FILE__,'liberty_times_s1.html'))
