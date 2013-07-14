@@ -18,7 +18,7 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
 
     @article[:reporter_name] = parse_reporter_name()
 
-    @article[:published_at] = Time.parse(doc.css('.gggs time @datetime').text)
+    @article[:published_at] = DateTime.strptime(doc.css('.gggs time').text, '%Y年%m月%d日%H:%M')
 
     clean_up
 

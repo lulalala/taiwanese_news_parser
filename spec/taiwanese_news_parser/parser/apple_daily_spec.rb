@@ -10,7 +10,7 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       article[:content].should include('配合行政院組織改造，內政部社會司')
       article[:company_name].should == '蘋果日報'
       #TODO article[:reporter_name].should == '王家俊'
-      #TODO article[:published_at].should == Time.new(2013,6,29,19,35)
+      article[:published_at].should == DateTime.new(2013,6,29,19,35)
     end
   end
 end
