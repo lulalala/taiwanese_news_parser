@@ -3,22 +3,22 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
     'appledaily.com.tw'
   end
 
-  def set_doc(url)
+  def doc
     @raw = open(url).read
     @doc = Nokogiri::HTML(@raw)
   end
 
   #url = 'http://www.appledaily.com.tw/appledaily/article/headline/20130414/34951658'
   def parse
-    @article[:title] = @doc.at_css('#h1').text
+    @article[:title] = doc.at_css('#h1').text
 
     @article[:company_name] = '蘋果日報'
 
-    @article[:content] = @doc.css('.articulum').css('p,h2').text
+    @article[:content] = doc.css('.articulum').css('p,h2').text
 
     @article[:reporter_name] = parse_reporter_name()
 
-    @article[:published_at] = Time.parse(@doc.css('.gggs time @datetime').text)
+    @article[:published_at] = Time.parse(doc.css('.gggs time @datetime').text)
 
     clean_up
 
@@ -26,7 +26,7 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
   end
 
   def parse_reporter_name
-    text = @doc.css('.articulum').css('p,h2').text.strip
+    text = doc.css('.articulum').css('p,h2').text.strip
     if match = text.match(%r{◎記者(.+)$})
       reporter_name = match[1]
     end

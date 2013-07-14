@@ -9,12 +9,12 @@ class TaiwaneseNewsParser::Parser::LibertyTimesBig5 < TaiwaneseNewsParser::Parse
 
   #url = 'http://www.libertytimes.com.tw/2013/new/apr/13/today-sp2.htm'
   def parse
-    @article[:title] = @doc.at_css('#newtitle').text
+    @article[:title] = doc.at_css('#newtitle').text
     @article[:company_name] = '自由時報'
-    @article[:content] = @doc.css('#newsContent>span:not(#newtitle)>p:not(.picture)').text
+    @article[:content] = doc.css('#newsContent>span:not(#newtitle)>p:not(.picture)').text
 
     @article[:reporter_name] = parse_reporter_name()
-    @article[:published_at] = Time.parse(@doc.at_css('#date').text)
+    @article[:published_at] = Time.parse(doc.at_css('#date').text)
 
     clean_up
 

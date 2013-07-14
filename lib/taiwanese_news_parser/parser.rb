@@ -1,7 +1,10 @@
 require 'taiwanese_news_parser/url_cleaner'
+require 'memoist'
 
 class TaiwaneseNewsParser::Parser
-  attr_reader :doc
+  extend Memoist
+
+  attr_accessor :url
 
   def self.applicable?(url)
     url.include?(domain())
@@ -17,17 +20,18 @@ class TaiwaneseNewsParser::Parser
   end
 
   def initialize(url)
+    @url = url
     @article = {}
     @article[:url] = url
     @article[:web_domain] = self.class.domain()
     @article[:url_id] = self.class.parse_url_id(url)
-    set_doc(url)
   end
 
-  def set_doc(url)
+  def doc
     @raw = open(url).read.encode('utf-8', 'big5', :invalid => :replace, :undef => :replace, :replace => '')
     @doc = ::Nokogiri::HTML(@raw,url)
   end
+  memoize :doc
 
   def clean_up
     [:content, :title, :reporter_name, :company_name].each do |attr|
