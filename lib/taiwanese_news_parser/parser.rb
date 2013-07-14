@@ -5,6 +5,7 @@ class TaiwaneseNewsParser::Parser
   extend Memoist
 
   attr_accessor :url
+  attr_reader :article
 
   def self.applicable?(url)
     url.include?(domain())
