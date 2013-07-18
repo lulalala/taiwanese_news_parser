@@ -10,9 +10,12 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
 
     #a.web_published_at = Time.parse(doc.at_css('#story_update').text)
 
-    origin = doc.at_css('#story_author').text.match(%r{【(.*)[/／╱](.*)[/／╱]})
-    @article[:company_name] = origin[1]
-    @article[:reporter_name] = origin[2][%r{記者(.+)},1]
+    # TODO better way to handle company name parsing
+    if !reproduced?
+      origin = doc.at_css('#story_author').text.match(%r{【(.*)[/／╱](.*)[/／╱]})
+      @article[:company_name] = origin[1]
+      @article[:reporter_name] = origin[2][%r{記者(.+)},1]
+    end
     @article[:published_at] = Time.parse(doc.at_css('#story_update').text)
 
     clean_up
