@@ -12,15 +12,26 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
 
     # TODO better way to handle company name parsing
     if !reproduced?
-      origin = doc.at_css('#story_author').text.match(%r{【(.*)[/／╱](.*)[/／╱]})
-      @article[:company_name] = origin[1]
-      @article[:reporter_name] = origin[2][%r{記者(.+)},1]
+      set_company_and_reporter
     end
     @article[:published_at] = Time.parse(doc.at_css('#story_update').text)
 
     clean_up
 
     @article
+  end
+
+  def set_company_and_reporter
+    source = doc.at_css('#story_author').text[%r{【(.*)】},1]
+    @article[:company_name] = parse_company_name(source)
+    @article[:reporter_name] = parse_reporter_name(source)
+  end
+
+  def parse_company_name(text)
+    text.match(%r{^(.*?)[/／╱]})[1]
+  end
+  def parse_reporter_name(text)
+    text[%r{[/／╱]記者(.*)[/／╱]},1]
   end
 
   def reproduced?

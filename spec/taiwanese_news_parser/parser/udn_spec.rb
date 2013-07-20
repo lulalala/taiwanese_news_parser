@@ -13,5 +13,11 @@ describe TaiwaneseNewsParser::Parser::Udn do
       article[:published_at].should == Time.new(2013,6,29,16,17)
     end
   end
+  describe '#parse_reporter_name' do
+    it do
+      subject = described_class.new('http://udn.com/NEWS/NATIONAL/NAT2/8040540.shtml')
+      expect{ subject.parse_reporter_name('中央社╱桃園20日電') }.to_not raise_error
+    end
+  end
 end
 
