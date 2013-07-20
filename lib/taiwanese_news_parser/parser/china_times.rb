@@ -9,6 +9,7 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   end
 
   #url = 'http://news.chinatimes.com/mainland/11050505/112013041400325.html'
+  #url = 'http://www.chinatimes.com/realtimenews/%E6%AD%BB%E4%BA%A1%E9%9B%B2%E9%9C%84%E9%A3%9B%E8%BB%8A-%E7%BE%8E%E5%A9%A6%E5%A2%9C%E8%90%BD%E8%BA%AB%E4%BA%A1-20130720002354-260408'
   def parse
     @article[:title] = doc.at_css('header h1').text
 
@@ -53,6 +54,13 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   end
 
   def self.parse_url_id(url)
-    url[%r{http://news.chinatimes.com/\w+/(\d+/\d+)},1]
+    url_id = url[%r{http://news\.chinatimes\.com/\w+/(\d+/\d+)},1]
+    if url_id.nil?
+      url_id = url[%r{[^-]*+[^-]*+-(\d+-\d+)},1]
+    end
+    if url_id.nil?
+      url_id = url[%r{chinatimes\.com/(.+)},1]
+    end
+    url_id
   end
 end

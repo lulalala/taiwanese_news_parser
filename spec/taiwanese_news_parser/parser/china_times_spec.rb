@@ -13,5 +13,14 @@ describe TaiwaneseNewsParser::Parser::ChinaTimes do
       article[:published_at].should == Time.new(2013,6,29,18,24)
     end
   end
+  describe '.parse_url_id' do
+    it 'old url' do
+      described_class.parse_url_id('http://news.chinatimes.com/mainland/11050505/112013041400325.html').should == '11050505/112013041400325'
+    end
+    it 'new url' do
+      described_class.parse_url_id('http://www.chinatimes.com/newspapers/%E9%BB%8E%E5%B7%B4%E5%AB%A9%E7%A6%81%E8%B3%BD-%E4%BA%9E%E9%8C%A6%E8%B3%BD%E5%89%A915%E9%9A%8A-20130720000861-260111').should == '20130720000861-260111'
+      described_class.parse_url_id('http://www.chinatimes.com/realtimenews/%E9%9F%93%E4%BA%9E%E8%88%AA%E7%BD%B9%E9%9B%A3%E5%B0%91%E5%A5%B3-%E7%A2%BA%E5%AE%9A%E9%81%AD%E6%95%91%E8%AD%B7%E8%BB%8A%E8%BC%BE%E6%96%83-20130720002396-260401').should == '20130720002396-260401'
+    end
+  end
 end
 
