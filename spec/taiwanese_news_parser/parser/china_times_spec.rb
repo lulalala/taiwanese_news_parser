@@ -12,6 +12,16 @@ describe TaiwaneseNewsParser::Parser::ChinaTimes do
       article[:reporter_name].should == '溫蘭魁'
       article[:published_at].should == Time.new(2013,6,29,18,24)
     end
+    it do
+      url = 'http://www.chinatimes.com/newspapers/%E7%99%BD%E7%B1%B3%E6%8F%9B%E7%95%AA%E8%96%AF-%E9%A6%AC%E5%B8%82%E5%BA%9C%E6%9C%89%E5%85%A7%E9%AC%BC%EF%BC%9F-20130718000466-260102'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'china_times_s2.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '白米換番薯 馬市府有內鬼？'
+      article[:content].should include('市民只能望著已換成台北富邦銀行的招牌，望樓興歎。')
+      article[:company_name].should == '中國時報'
+      article[:reporter_name].should == '張立勳'
+      article[:published_at].should == Time.new(2013,7,18,5,40)
+    end
   end
   describe '.parse_url_id' do
     it 'old url' do

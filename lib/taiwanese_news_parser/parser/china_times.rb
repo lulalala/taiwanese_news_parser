@@ -33,6 +33,9 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   end
 
   def parse_reporter_name
+    el = doc.at_css('.reporter a[rel=author]')
+    return el.text if el
+
     text = doc.css('.reporter>text()').text
     if match = text.match(%r{記者(.+?)[/／╱／]})
       reporter_name = match[1]
