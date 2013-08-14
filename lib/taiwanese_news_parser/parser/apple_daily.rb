@@ -38,6 +38,7 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
   end
 
   def self.parse_url_id(url)
-    url[%r{http://www.appledaily\.com\.tw/appledaily/article/headline/(\d+/\d+)%},1]
+    # removes trailing slash
+    url[%r{http://www.appledaily\.com\.tw/\w+/article/\w+/((?:\d+/)+)},1][0..-2]
   end
 end

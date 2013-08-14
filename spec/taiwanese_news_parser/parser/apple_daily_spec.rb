@@ -13,5 +13,16 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       article[:published_at].should == DateTime.new(2013,6,29,19,35)
     end
   end
+
+  describe '#parse_url_id' do
+    example 'realtime news' do
+      url = 'http://www.appledaily.com.tw/realtimenews/article/international/20130807/238720/'
+      described_class.parse_url_id(url).should == '20130807/238720'
+    end
+    example 'url with three numbers' do
+      url = 'http://www.appledaily.com.tw/realtimenews/article/politics/20130809/239528/1/'
+      described_class.parse_url_id(url).should == '20130809/239528/1'
+    end
+  end
 end
 
