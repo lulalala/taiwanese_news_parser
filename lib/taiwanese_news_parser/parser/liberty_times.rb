@@ -55,6 +55,6 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
   end
 
   def self.parse_url_id(url)
-    url[%r{http://www.libertytimes.com.tw/(.*)\.htm},1]
+    url[%r{news\.php\?no=(\d+)},1]
   end
 end
