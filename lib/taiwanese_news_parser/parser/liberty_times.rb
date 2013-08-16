@@ -31,8 +31,6 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
 
     @article[:reporter_name] = parse_reporter_name()
 
-    @article[:url_id] = @article[:url][%r{news\.php\?no=(\d+)},1]
-
     clean_up
 
     @article
