@@ -39,6 +39,6 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
   end
 
   def self.parse_url_id(url)
-    url[%r{(\w+/\w+/\d+)},1]
+    url[%r{\w+/\w+/(\d+)},1]
   end
 end

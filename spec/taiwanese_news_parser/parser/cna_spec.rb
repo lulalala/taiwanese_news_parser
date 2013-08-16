@@ -13,5 +13,21 @@ describe TaiwaneseNewsParser::Parser::Cna do
       article[:published_at].should == Time.new(2013,6,29,19,3)
     end
   end
-end
 
+  describe '#parse_url_id' do
+    it 'hanle different versions of same news' do
+      url = 'http://www.cna.com.tw/News/FirstNews/201308140023.aspx'
+      described_class.parse_url_id(url).should == '201308140023'
+
+      url = 'http://www.cna.com.tw/News/FirstNews/201308160018-1.aspx'
+      described_class.parse_url_id(url).should == '201308160018'
+
+      url = 'http://www.cna.com.tw/News/FirstNews/201308110023-3.aspx'
+      described_class.parse_url_id(url).should == '201308110023'
+    end
+    it 'handle grouped news url' do
+      url = 'http://www.cna.com.tw/Topic/Popular/3912-1/201308140022-1.aspx'
+      described_class.parse_url_id(url).should == '201308140022'
+    end
+  end
+end

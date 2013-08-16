@@ -28,9 +28,16 @@ describe TaiwaneseNewsParser::Parser::ChinaTimes do
       described_class.parse_url_id('http://news.chinatimes.com/mainland/11050505/112013041400325.html').should == '11050505/112013041400325'
     end
     it 'new url' do
-      described_class.parse_url_id('http://www.chinatimes.com/newspapers/%E9%BB%8E%E5%B7%B4%E5%AB%A9%E7%A6%81%E8%B3%BD-%E4%BA%9E%E9%8C%A6%E8%B3%BD%E5%89%A915%E9%9A%8A-20130720000861-260111').should == '20130720000861-260111'
-      described_class.parse_url_id('http://www.chinatimes.com/realtimenews/%E9%9F%93%E4%BA%9E%E8%88%AA%E7%BD%B9%E9%9B%A3%E5%B0%91%E5%A5%B3-%E7%A2%BA%E5%AE%9A%E9%81%AD%E6%95%91%E8%AD%B7%E8%BB%8A%E8%BC%BE%E6%96%83-20130720002396-260401').should == '20130720002396-260401'
+      described_class.parse_url_id('http://www.chinatimes.com/newspapers/%E9%BB%8E%E5%B7%B4%E5%AB%A9%E7%A6%81%E8%B3%BD-%E4%BA%9E%E9%8C%A6%E8%B3%BD%E5%89%A915%E9%9A%8A-20130720000861-260111').should == '20130720000861'
+      described_class.parse_url_id('http://www.chinatimes.com/realtimenews/%E9%9F%93%E4%BA%9E%E8%88%AA%E7%BD%B9%E9%9B%A3%E5%B0%91%E5%A5%B3-%E7%A2%BA%E5%AE%9A%E9%81%AD%E6%95%91%E8%AD%B7%E8%BB%8A%E8%BC%BE%E6%96%83-20130720002396-260401').should == '20130720002396'
+    end
+    it do
+      url = 'http://www.chinatimes.com/realtimenews/%E9%AB%98%E9%90%B510%EF%BC%8F1%E6%BC%B2%E5%83%B9-%E6%B6%88%E5%9F%BA%E6%9C%83%E6%89%B9%E4%B8%8D%E5%90%88%E7%90%86-20130816003789-260405'
+      described_class.parse_url_id(url).should == '20130816003789'
+    end
+    it do
+      url = 'http://www.chinatimes.com/realtimenews/%E4%B8%8A%E6%91%A9%E9%90%B5%E7%B4%84%E6%9C%83%E6%9B%9D%E5%85%89-%E9%99%B3%E6%BC%A2%E5%85%B8%E6%88%80%E6%83%85%E7%94%9F%E8%AE%8A-20130816002793-260404'
+      described_class.parse_url_id(url).should == '20130816002793'
     end
   end
 end
-

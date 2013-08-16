@@ -38,6 +38,6 @@ class TaiwaneseNewsParser::Parser::LibertyTimesBig5 < TaiwaneseNewsParser::Parse
   end
 
   def self.parse_url_id(url)
-    url[%r{http://www\.libertytimes\.com\.tw/(.*\.htm)},1]
+    url[%r{http://www\.libertytimes\.com\.tw/(.*)\.htm},1]
   end
 end

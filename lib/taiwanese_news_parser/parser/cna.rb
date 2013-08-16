@@ -50,6 +50,6 @@ class TaiwaneseNewsParser::Parser::Cna < TaiwaneseNewsParser::Parser
   end
 
   def self.parse_url_id(url)
-    url[%r{http://www.cna.com.tw/News/(\w+/\d+-\d+)},1]
+    url[%r{/(\d+)(?:\-\d)?\.},1]
   end
 end

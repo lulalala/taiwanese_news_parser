@@ -19,5 +19,15 @@ describe TaiwaneseNewsParser::Parser::Udn do
       expect{ subject.parse_reporter_name('中央社╱桃園20日電') }.to_not raise_error
     end
   end
+  describe '#parse_url_id' do
+    it do
+      url = 'http://udn.com/news/national/nats4/8099187.shtml'
+      described_class.parse_url_id(url).should == '8099187'
+    end
+    it 'breaking news' do
+      url = 'http://udn.com/NEWS/BREAKINGNEWS/BREAKINGNEWS1/8101247.shtml'
+      described_class.parse_url_id(url).should == '8101247'
+    end
+  end
 end
 

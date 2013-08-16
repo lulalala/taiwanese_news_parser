@@ -59,7 +59,7 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   def self.parse_url_id(url)
     url_id = url[%r{http://news\.chinatimes\.com/\w+/(\d+/\d+)},1]
     if url_id.nil?
-      url_id = url[%r{[^-]*+[^-]*+-(\d+-\d+)},1]
+      url_id = url[%r{[^-]*+[^-]*+-(\d+)-\d+},1]
     end
     if url_id.nil?
       url_id = url[%r{chinatimes\.com/(.+)},1]

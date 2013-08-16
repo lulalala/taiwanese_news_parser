@@ -13,5 +13,19 @@ describe TaiwaneseNewsParser::Parser::LibertyTimesBig5 do
       article[:published_at].should == Time.new(2013,6,29)
     end
   end
-end
 
+  describe '#parse_url_id' do
+    it do
+      url = 'http://www.libertytimes.com.tw/2013/new/jun/29/today-sp1-3.htm'
+      described_class.parse_url_id(url).should == '2013/new/jun/29/today-sp1-3'
+    end
+    it do
+      url = 'http://www.libertytimes.com.tw/2013/new/jun/29/today-so10.htm'
+      described_class.parse_url_id(url).should == '2013/new/jun/29/today-so10'
+    end
+    it do
+      url = 'http://www.libertytimes.com.tw/2013/new/jun/29/today-int4.htm'
+      described_class.parse_url_id(url).should == '2013/new/jun/29/today-int4'
+    end
+  end
+end
