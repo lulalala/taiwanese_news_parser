@@ -1,0 +1,37 @@
+{
+  "author": "lulalala",
+  "contributors": [],
+  "status": "alpha",
+  "name": "taiwanese_news_parser",
+  "name_zh": "台灣新聞網站解析器",
+  "description": "Parse Taiwanese based news agency website news articles",
+  "description_zh": "台灣新聞媒體網站的新聞解析庫",
+  "homepage": "https://github.com/lulalala/taiwanese_news_parser",
+  "document": "http://hack.g0v.tw/taiwanese_news_parser",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lulalala/taiwanese_news_parser"
+  },
+  "licenses": [
+    {
+      "type": "MIT"
+    }
+  ],
+  "keywords": [
+    "ruby"
+  ],
+  "audience": [
+    "public"
+  ],
+  "products": [
+    "library",
+    "api"
+  ],
+  "projects": [
+    "taiwanese_news_parser"
+  ],
+  "thumbnail": "",
+  "needs": [
+    "programmer"
+  ]
+}
