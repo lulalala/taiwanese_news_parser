@@ -14,7 +14,7 @@ class TaiwaneseNewsParser::Parser::LibertyTimesBig5 < TaiwaneseNewsParser::Parse
   #url = 'http://www.libertytimes.com.tw/2013/new/apr/13/today-sp2.htm'
   def parse
     @article[:title] = doc.at_css('#newtitle').text
-    @article[:company_name] = '自由時報'
+    @article[:company_name] = parse_company_name
     @article[:content] = doc.css('#newsContent>span:not(#newtitle)>p:not(.picture)').text
 
     @article[:reporter_name] = parse_reporter_name()
@@ -34,6 +34,10 @@ class TaiwaneseNewsParser::Parser::LibertyTimesBig5 < TaiwaneseNewsParser::Parse
       reporter_name = match[1]
     end
     reporter_name
+  end
+
+  def parse_company_name
+    '自由時報'
   end
 
   def clean_url

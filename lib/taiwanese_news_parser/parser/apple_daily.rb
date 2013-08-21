@@ -16,7 +16,7 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
   def parse
     @article[:title] = doc.at_css('#h1').text
 
-    @article[:company_name] = '蘋果日報'
+    @article[:company_name] = parse_company_name
 
     @article[:content] = doc.css('.articulum').css('p,h2').text
 
@@ -27,6 +27,10 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
     clean_up
 
     @article
+  end
+
+  def parse_company_name
+    '蘋果日報'
   end
 
   def parse_reporter_name

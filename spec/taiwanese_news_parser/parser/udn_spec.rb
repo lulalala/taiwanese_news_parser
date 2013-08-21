@@ -16,7 +16,16 @@ describe TaiwaneseNewsParser::Parser::Udn do
   describe '#parse_reporter_name' do
     it do
       subject = described_class.new('http://udn.com/NEWS/NATIONAL/NAT2/8040540.shtml')
-      expect{ subject.parse_reporter_name('中央社╱桃園20日電') }.to_not raise_error
+      subject.stub(:get_company_name_and_reporter_name){'中央社╱桃園20日電'}
+
+      expect{ subject.parse_reporter_name }.to_not raise_error
+    end
+  end
+  describe '#reproduced?' do
+    it do
+      subject = described_class.new('http://udn.com/NEWS/NATIONAL/NAT2/8040540.shtml')
+      subject.stub(:get_company_name_and_reporter_name){'中央社╱桃園20日電'}
+      subject.reproduced?.should == true
     end
   end
   describe '#parse_url_id' do

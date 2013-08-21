@@ -43,7 +43,7 @@ class TaiwaneseNewsParser::Parser
   end
 
   def reproduced?
-    false
+    !self.class.names.include?(parse_company_name)
   end
 
   Dir[File.dirname(__FILE__) + '/parser/*.rb'].each{|file| require file}

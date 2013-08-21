@@ -20,7 +20,7 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
   def parse
     # new layout uses utf-8
     @article[:title] = doc.at_css('#newsti text()').text
-    @article[:company_name] = '自由時報'
+    @article[:company_name] = parse_company_name
     @article[:content] = doc.css('#newsc.news_content').text
 
     time = doc.at_css('.conttime').text[%r{\d{4}/\d{1,2}/\d{1,2} \d{2}:\d{2}}]
@@ -49,6 +49,10 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
       reporter_name = match[1]
     end
     reporter_name
+  end
+
+  def parse_company_name
+    '自由時報'
   end
 
   def clean_url

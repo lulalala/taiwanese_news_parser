@@ -17,10 +17,7 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   def parse
     @article[:title] = doc.at_css('header h1').text
 
-    @article[:company_name] = doc.at_css('.reporter>a').text
-    if @article[:company_name] == '新聞速報'
-      @article[:company_name] = nil
-    end
+    @article[:company_name] = parse_company_name
 
     @article[:content] = doc.css('.page_container article>p').text
 
@@ -51,13 +48,19 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
     reporter_name
   end
 
+  def parse_company_name
+    n = doc.at_css('.reporter>a').text
+    if n == '時週精選'
+      n = '時報週刊'
+    elsif n == '新聞速報'
+      n = '中時電子報'
+    end
+    n
+  end
+
   def clean_url
     cleaner = TaiwaneseNewsParser::UrlCleaner.new('id')
     @article[:url] = cleaner.clean(@article[:url])
-  end
-
-  def reproduced?
-    doc.css('.reporter>a').text.include?('中央社')
   end
 
   def self.parse_url_id(url)

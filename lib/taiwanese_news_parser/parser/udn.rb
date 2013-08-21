@@ -14,10 +14,9 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
 
     #a.web_published_at = Time.parse(doc.at_css('#story_update').text)
 
-    # TODO better way to handle company name parsing
-    if !reproduced?
-      set_company_and_reporter
-    end
+    @article[:company_name] = parse_company_name
+    @article[:reporter_name] = parse_reporter_name
+
     @article[:published_at] = Time.parse(doc.at_css('#story_update').text)
 
     clean_up
@@ -25,24 +24,20 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
     @article
   end
 
-  def set_company_and_reporter
-    source = doc.at_css('#story_author').text[%r{【(.*)】},1]
-    @article[:company_name] = parse_company_name(source)
-    @article[:reporter_name] = parse_reporter_name(source)
+  def parse_company_name
+    get_company_name_and_reporter_name.match(%r{^(.*?)[/／╱]})[1]
   end
-
-  def parse_company_name(text)
-    text.match(%r{^(.*?)[/／╱]})[1]
-  end
-  def parse_reporter_name(text)
-    text[%r{[/／╱]記者(.*)[/／╱]},1]
-  end
-
-  def reproduced?
-    doc.css('td.story_author div#story_author').text.include?('中央社')
+  def parse_reporter_name
+    get_company_name_and_reporter_name[%r{[/／╱]記者(.*)[/／╱]},1]
   end
 
   def self.parse_url_id(url)
     url[%r{\w+/\w+/(\d+)},1]
+  end
+
+private
+
+  def get_company_name_and_reporter_name
+    doc.at_css('#story_author').text[%r{【(.*)】},1]
   end
 end
