@@ -3,6 +3,10 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
     'libertytimes.com.tw'
   end
 
+  def self.names
+    %{自由時報}
+  end
+
   def self.applicable?(url)
     url.match(%r{libertytimes\.com\.tw/liveNews/news\.php})
   end

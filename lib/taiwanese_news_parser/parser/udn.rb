@@ -3,6 +3,10 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
     'udn.com'
   end
 
+  def self.names
+    %{聯合報 聯合晚報}
+  end
+
   #url = 'http://udn.com/NEWS/NATIONAL/NATS5/7807573.shtml'
   def parse
     @article[:title] = doc.at_css('#story_title').text

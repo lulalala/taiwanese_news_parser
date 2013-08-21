@@ -3,6 +3,10 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
     'appledaily.com.tw'
   end
 
+  def self.names
+    %w{蘋果日報}
+  end
+
   def doc
     @raw = open(url).read
     @doc = Nokogiri::HTML(@raw)

@@ -3,6 +3,10 @@ class TaiwaneseNewsParser::Parser::Cna < TaiwaneseNewsParser::Parser
     'cna.com.tw'
   end
 
+  def self.names
+    %{中央社}
+  end
+
   def doc
     @raw = open(url).read
     @doc = Nokogiri::HTML(@raw)

@@ -3,6 +3,10 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
     'chinatimes.com'
   end
 
+  def self.names
+    %w{中國時報 中時電子報 工商時報 旺報 時報週刊 中天 中視 中廣}
+  end
+
   def doc
     @raw = open(url).read
     @doc = Nokogiri::HTML(@raw)

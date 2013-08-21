@@ -3,6 +3,10 @@ class TaiwaneseNewsParser::Parser::LibertyTimesBig5 < TaiwaneseNewsParser::Parse
     'libertytimes.com.tw'
   end
 
+  def self.names
+    %{自由時報}
+  end
+
   def self.applicable?(url)
     url.match(%r{libertytimes\.com\.tw/\d+/\w+/\w+/\d+/.+\.htm})
   end
