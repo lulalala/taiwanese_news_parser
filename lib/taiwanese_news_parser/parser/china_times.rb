@@ -15,7 +15,7 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   #url = 'http://news.chinatimes.com/mainland/11050505/112013041400325.html'
   #url = 'http://www.chinatimes.com/realtimenews/%E6%AD%BB%E4%BA%A1%E9%9B%B2%E9%9C%84%E9%A3%9B%E8%BB%8A-%E7%BE%8E%E5%A9%A6%E5%A2%9C%E8%90%BD%E8%BA%AB%E4%BA%A1-20130720002354-260408'
   def parse
-    @article[:title] = doc.at_css('header h1').text
+    @article[:title] = doc.at_css('.page_container header h1').text
 
     @article[:company_name] = parse_company_name
 

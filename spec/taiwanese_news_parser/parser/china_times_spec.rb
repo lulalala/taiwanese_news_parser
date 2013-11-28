@@ -22,6 +22,16 @@ describe TaiwaneseNewsParser::Parser::ChinaTimes do
       article[:reporter_name].should == '張立勳'
       article[:published_at].should == Time.new(2013,7,18,5,40)
     end
+    it do
+      url = 'http://www.chinatimes.com/newspapers/20131127000637-260112'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'china_times_s3.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '李安失望台灣商業片 不會進戲院'
+      article[:content].should include('金馬50風光落幕，擔任評審團主委的李安不負眾望，以國際化視野，評出最優秀作品。')
+      article[:company_name].should == '中國時報'
+      article[:reporter_name].should == '陳亭均'
+      article[:published_at].should == Time.new(2013,11,27,4,9)
+    end
   end
   describe '.parse_url_id' do
     it 'old url' do
