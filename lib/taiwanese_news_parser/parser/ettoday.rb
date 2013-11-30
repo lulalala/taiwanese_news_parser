@@ -18,7 +18,7 @@ class TaiwaneseNewsParser::Parser::Ettoday < TaiwaneseNewsParser::Parser
 
     @article[:company_name] = '東森'
 
-    @article[:content] = doc.css('.story p').text
+    @article[:content] = doc.css('[itemprop=articleBody]>p').text
 
     @article[:reporter_name] = parse_reporter_name()
 

@@ -8,6 +8,9 @@ describe TaiwaneseNewsParser::Parser::Ettoday do
       article = described_class.new(url).parse
       article[:title].should == '檢方都諭令「不得騷擾」了　王貴芬30日赴長庚道歉'
       article[:content].should include('桃園檢方訊後將她以10萬元交保並限制住居及出境')
+      article[:content].should include('否則可能會違反檢方諭令')
+      article[:content].should_not include('活動衝動倒數')
+      article[:content].should_not include('酒店妹自殺')
       article[:company_name].should == '東森'
       article[:reporter_name].should == nil
       article[:published_at].should == Time.new(2013,11,29,21,19)
@@ -18,6 +21,7 @@ describe TaiwaneseNewsParser::Parser::Ettoday do
       article = described_class.new(url).parse
       article[:title].should == '軍公教18%調9%？　民進黨不支持：18%結構複雜'
       article[:content].should include('軍公教18%優存利率可望調降為9%')
+      article[:content].should_not include('看見台灣列環教片')
       article[:company_name].should == '東森'
       article[:reporter_name].should == '王文萱'
       article[:published_at].should == Time.new(2013,1,28,15,23)
