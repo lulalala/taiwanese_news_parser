@@ -12,6 +12,15 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       #TODO article[:reporter_name].should == '王家俊'
       article[:published_at].should == DateTime.new(2013,6,29,19,35)
     end
+
+    it do
+      url = 'http://www.appledaily.com.tw/appledaily/article/headline/20050811/1968864'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'apple_daily_s2.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '診所助理救活人反觸法' #TODO remove one space in the middle
+      article[:content].should include('姚在事發後已離職，林鴻也病逝。')
+      article[:company_name].should == '蘋果日報'
+    end
   end
 
   describe '#parse_url_id' do
