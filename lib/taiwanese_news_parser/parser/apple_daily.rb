@@ -22,7 +22,7 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
 
     @article[:reporter_name] = parse_reporter_name()
 
-    @article[:published_at] = DateTime.strptime(doc.css('.gggs time').text, '%Y年%m月%d日%H:%M')
+    @article[:published_at] = self.class.parse_time(doc.css('.gggs time').text)
 
     clean_up
 
@@ -48,5 +48,20 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
   def self.parse_url_id(url)
     # removes trailing slash
     url[%r{http://www.appledaily\.com\.tw/\w+/article/\w+/((?:\d+/)+)},1][0..-2]
+  end
+
+  def self.parse_time(raw_time)
+    valid_formats = ['%Y年%m月%d日%H:%M', '%Y年%m月%d日']
+
+    date = nil
+    valid_formats.each do |format|
+      begin
+        date = DateTime.strptime(raw_time, format)
+      rescue
+      end
+      break if !date.nil?
+    end
+
+    return date
   end
 end

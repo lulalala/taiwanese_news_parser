@@ -24,5 +24,14 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       described_class.parse_url_id(url).should == '20130809/239528/1'
     end
   end
+
+  describe '.parse_time' do
+    it 'parse date with time ' do
+      described_class.parse_time('2013年06月29日19:35').should == DateTime.new(2013,6,29,19,35)
+    end
+    it 'parse date' do
+      described_class.parse_time('2005年08月11日').should == DateTime.new(2005,8,11)
+    end
+  end
 end
 
