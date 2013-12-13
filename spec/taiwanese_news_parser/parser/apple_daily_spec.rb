@@ -9,7 +9,7 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       article[:title].should == '邱文達內定衛福部長  政次曾中明戴桂英呼聲高' #TODO remove one space in the middle
       article[:content].should include('配合行政院組織改造，內政部社會司')
       article[:company_name].should == '蘋果日報'
-      #TODO article[:reporter_name].should == '王家俊'
+      article[:reporter_name].should == '王家俊'
       article[:published_at].should == DateTime.new(2013,6,29,19,35)
     end
 
@@ -19,7 +19,9 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       article = described_class.new(url).parse
       article[:title].should == '診所助理救活人反觸法' #TODO remove one space in the middle
       article[:content].should include('姚在事發後已離職，林鴻也病逝。')
+      article[:content].should include('女子姚素珍三年前在北市中心診所當助理研究員')
       article[:company_name].should == '蘋果日報'
+      article[:reporter_name].should == '丁牧群'
     end
   end
 

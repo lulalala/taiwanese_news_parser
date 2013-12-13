@@ -36,6 +36,8 @@ class TaiwaneseNewsParser::Parser::AppleDaily < TaiwaneseNewsParser::Parser
   def parse_reporter_name
     text = doc.css('.articulum').css('p,h2').text.strip
     if match = text.match(%r{◎記者(.+)$})
+      return reporter_name = match[1]
+    elsif match = text.match(%r{【(?:記者)?(.+)[/／╱]})
       reporter_name = match[1]
     end
     reporter_name
