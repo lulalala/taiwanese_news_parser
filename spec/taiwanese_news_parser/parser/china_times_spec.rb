@@ -32,6 +32,16 @@ describe TaiwaneseNewsParser::Parser::ChinaTimes do
       article[:reporter_name].should == '陳亭均'
       article[:published_at].should == Time.new(2013,11,27,4,9)
     end
+    it 'format' do
+      url = 'http://news.chinatimes.com/politics/11050202/112013122200105.html'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'china_times_s4.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '柯文哲團隊 將網羅一九八五'
+      article[:content].should include('下一步，更有意號召公民一九八五等社會團體加入。')
+      article[:company_name].should == '中國時報'
+      article[:reporter_name].should == '朱真楷'
+      article[:published_at].should == Time.new(2013,12,22,4,9)
+    end
   end
   describe '.parse_url_id' do
     it 'old url' do
