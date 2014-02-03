@@ -23,6 +23,15 @@ describe TaiwaneseNewsParser::Parser::AppleDaily do
       article[:company_name].should == '蘋果日報'
       article[:reporter_name].should == '丁牧群'
     end
+
+    it 'reporter name' do
+      url = 'http://www.appledaily.com.tw/appledaily/article/international/20140115/35580004/%E6%97%A5%E5%89%8D%E9%A6%96%E7%9B%B8%E7%B4%B0%E5%B7%9D%E9%81%B8%E6%9D%B1%E4%BA%AC%E7%9F%A5%E4%BA%8B'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'apple_daily_s3.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '日前首相細川 選東京知事'
+      article[:content].should include('日本前東京都知事豬瀨直樹因涉嫌非法收受政治獻金辭職下台')
+      article[:reporter_name].should == '陳怡妏'
+    end
   end
 
   describe '#parse_url_id' do
