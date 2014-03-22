@@ -21,7 +21,7 @@ describe TaiwaneseNewsParser::Parser::Cts do
       article = described_class.new(url).parse
       article[:title].should == '學生要求馬英九對話　總統府：不會接受'
       article[:content].should include('但是學生用這種方式要求對話，府方不會接受。')
-      article[:company_name].should == '華視'
+      article[:company_name].should == '今日新聞'
       article[:reporter_name].should == nil
       article[:published_at].should == Time.new(2014,3,22,10,9)
     end

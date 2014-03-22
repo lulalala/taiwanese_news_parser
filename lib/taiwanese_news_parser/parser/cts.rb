@@ -43,7 +43,7 @@ class TaiwaneseNewsParser::Parser::Cts < TaiwaneseNewsParser::Parser
   end
 
   def parse_company_name
-    self.class.names.first
+    doc.at_css('table table div[align="right"] a img').attr(:alt)
   end
 
   def self.parse_url_id(url)
