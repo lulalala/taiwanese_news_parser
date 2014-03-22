@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["lulalala"]
   spec.email         = ["mark@goodlife.tw"]
   spec.description   = %q{台灣各新聞網站新聞解析器}
-  spec.summary       = %q{台灣各新聞網站新聞解析器}
+  spec.summary       = %q{Parser for various news agency websites in Taiwan}
   spec.homepage      = "https://github.com/lulalala/taiwanese_news_parser"
   spec.license       = "MIT"
 
