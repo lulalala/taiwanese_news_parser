@@ -12,6 +12,10 @@
 
 會回傳新聞資訊的 hash
 
+## 使用實例
+
+* [新聞糾正](http://news.1dv.tw)
+
 ## Contributing
 
 想要協助的朋友可以幫忙為其他新聞網站寫解析器。實作細節請參考個別解析器以及[wiki](https://github.com/lulalala/taiwanese_news_parser/wiki)。
