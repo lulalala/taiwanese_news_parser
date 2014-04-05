@@ -14,7 +14,7 @@ class TaiwaneseNewsParser::Parser::Cna < TaiwaneseNewsParser::Parser
 
   #url = 'http://www.cna.com.tw/News/aSaM/201304120296-1.aspx'
   def parse
-    @article[:title] = doc.at_css('.news_content h1').text
+    @article[:title] = doc.at_css('.news_content h1, .news_content h2').text
 
     @article[:company_name] = '中央社'
 
