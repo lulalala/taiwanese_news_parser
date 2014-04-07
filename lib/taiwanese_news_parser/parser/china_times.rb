@@ -4,7 +4,7 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   end
 
   def self.names
-    %w{中國時報 中時電子報 工商時報 旺報 時報週刊 中天 中視 中廣}
+    %w{中國時報 中時電子報 工商時報 旺報 時報週刊 中天 中視 中廣 中時即時}
   end
 
   def doc
