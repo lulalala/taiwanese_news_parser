@@ -12,11 +12,13 @@ class TaiwaneseNewsParser::Parser
   end
 
   def self.applicable_parser(url)
+    redirected_url = open(url).base_uri.to_s
+
     parser_class = subclasses.find do |parser_class|
-      parser_class.applicable?(url)
+      parser_class.applicable?(redirected_url)
     end
     if parser_class
-      parser_class.new(url)
+      parser_class.new(redirected_url)
     end
   end
 
