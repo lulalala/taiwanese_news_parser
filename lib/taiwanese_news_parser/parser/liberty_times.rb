@@ -8,7 +8,7 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
   end
 
   def self.applicable?(url)
-    url.match(%r{libertytimes\.com\.tw/liveNews/news\.php})
+    url.include?('iservice.ltn.com.tw')
   end
 
   def doc
@@ -16,16 +16,15 @@ class TaiwaneseNewsParser::Parser::LibertyTimes < TaiwaneseNewsParser::Parser
     @doc = Nokogiri::HTML(@raw)
   end
 
-  #url = 'http://www.libertytimes.com.tw/2013/new/apr/13/today-sp2.htm'
   def parse
     # new layout uses utf-8
-    @article[:title] = doc.at_css('#newsti text()').text
+    @article[:title] = doc.at_css('.content h1 text()').text
     @article[:company_name] = parse_company_name
-    @article[:content] = doc.css('#newsc.news_content').text
+    @article[:content] = doc.css('.content p').text
 
-    time = doc.at_css('.conttime').text[%r{\d{4}/\d{1,2}/\d{1,2} \d{2}:\d{2}}]
+    time = doc.at_css('.content .date').text[%r{\d{4}-\d{1,2}-\d{1,2} \d{2}:\d{2}}]
     if time.nil?
-      match = doc.at_css('.conttime').text.match(%r{(\d{2}):(\d{2})})
+      match = doc.at_css('.content .date').text.match(%r{(\d{2}):(\d{2})})
       now = Time.now
       today = Date.today
       @article[:published_at] = Time.new(today.year, today.month, today.day, match[1].to_i, match[2].to_i)
