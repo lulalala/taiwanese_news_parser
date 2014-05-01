@@ -26,6 +26,17 @@ describe TaiwaneseNewsParser::Parser::LibertyTimesNews do
       article[:reporter_name].should == nil
       article[:published_at].should == Time.new(2014,4,30,10,57)
     end
+
+    it do
+      url = 'http://news.ltn.com.tw/news/society/breakingnews/829851'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'liberty_times_news_s3.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '又傳酒駕釀禍 少婦被撞陷昏迷'
+      article[:content].should include('又傳酒駕釀禍！花蓮縣壽豐鄉一名男子昨天（28日）在友人家喝得爛醉')
+      article[:company_name].should == '自由時報'
+      article[:reporter_name].should == nil
+      article[:published_at].should == Time.new(2013,6,29,17,52)
+    end
   end
 
   describe '#parse_url_id' do
