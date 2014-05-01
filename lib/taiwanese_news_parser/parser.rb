@@ -50,7 +50,7 @@ class TaiwaneseNewsParser::Parser
 
   Dir[File.dirname(__FILE__) + '/parser/*.rb'].each{|file| require file}
   def self.subclasses
-    [ Udn, LibertyTimes, LibertyTimesBig5, ChinaTimes, Cna, AppleDaily, Ettoday, Tvbs, Cts, NowNews ]
+    [ Udn, LibertyTimes, LibertyTimesBig5, LibertyTimesNews, ChinaTimes, ChinaTimesMoney, Cna, AppleDaily, Ettoday, Tvbs, Cts, NowNews ]
   end
 
   def self.domain
