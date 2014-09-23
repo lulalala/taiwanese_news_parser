@@ -53,6 +53,10 @@ class TaiwaneseNewsParser::Parser::ChinaTimes < TaiwaneseNewsParser::Parser
   end
 
   def parse_company_name
+    if doc.at_css('.reporter>a').nil?
+      return '中時電子報'
+    end
+
     n = doc.at_css('.reporter>a').text
     if n == '時週精選'
       n = '時報週刊'

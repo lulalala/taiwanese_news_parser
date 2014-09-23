@@ -42,6 +42,16 @@ describe TaiwaneseNewsParser::Parser::ChinaTimes do
       article[:reporter_name].should == '朱真楷'
       article[:published_at].should == Time.new(2013,12,22,4,9)
     end
+    it 'without company name' do
+      url = 'http://star.chinatimes.com/news/20140923004935-261101'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'china_times_s5.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '33歲安達祐實性感扮學生 童顏被讚無違和'
+      article[:content].should include('然而去年被爆介入攝影師桑島智輝婚姻的她')
+      article[:company_name].should == '中時電子報'
+      article[:reporter_name].should == '吳玫穎'
+      article[:published_at].should == Time.new(2014,9,23,20,46)
+    end
   end
   describe '.parse_url_id' do
     it 'old url' do
