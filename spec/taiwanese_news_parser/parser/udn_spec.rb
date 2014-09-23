@@ -12,6 +12,16 @@ describe TaiwaneseNewsParser::Parser::Udn do
       article[:reporter_name].should == '邱瓊平'
       article[:published_at].should == Time.new(2013,6,29,16,17)
     end
+    it do
+      url = 'http://udn.com/NEWS/SPORTS/SPO6/8950901.shtml'
+      FakeWeb.register_uri(:get, url, body:sample(__FILE__,'udn_s2.html'))
+      article = described_class.new(url).parse
+      article[:title].should == '南韓style 明目張膽搞小動作'
+      article[:content].should include('仁川亞運才正式開賽兩天')
+      article[:company_name].should == '聯合報'
+      article[:reporter_name].should == '古硯偉'
+      article[:published_at].should == Time.new(2014,9,22,10,29)
+    end
   end
   describe '#parse_reporter_name' do
     it do

@@ -28,7 +28,10 @@ class TaiwaneseNewsParser::Parser::Udn < TaiwaneseNewsParser::Parser
     get_company_name_and_reporter_name.match(%r{^(.*?)[/／╱]})[1]
   end
   def parse_reporter_name
-    get_company_name_and_reporter_name[%r{[/／╱]記者(.*)[/／╱]},1]
+    source = get_company_name_and_reporter_name
+    name = source[%r{[/／╱](?:本報)?記者(.*)[/／╱]},1]
+    name ||= source[%r{本報記者(.*)[/／╱]?},1]
+    name
   end
 
   def self.parse_url_id(url)
