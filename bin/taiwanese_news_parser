@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+require 'taiwanese_news_parser'
+require 'json'
+
+url = ARGV[0]
+
+if url.nil?
+  abort "taiwanese_news_parser: no URL provided.\nusage: taiwanese_news_parser \"[url]\"\nPlease remember to quote your url."
+end
+
+begin
+  puts JSON.generate(TaiwaneseNewsParser.parse(url))
+rescue => e
+  abort "taiwanese_news_parser: #{e.message}"
+end
