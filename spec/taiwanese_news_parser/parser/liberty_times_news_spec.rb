@@ -14,7 +14,7 @@ describe TaiwaneseNewsParser::Parser::LibertyTimesNews do
       article[:content].should include('在今年的七合一選舉和來年的立委、總統選舉時，要求候選人承諾促成非核家園。')
       article[:company_name].should == '自由時報'
       article[:reporter_name].should == '李欣芳'
-      article[:published_at].should == Time.new(2014,4,30,14,49)
+      article[:published_at].should == Time.new(2014,4,30,14,49,37)
     end
     it do
       url = 'http://news.ltn.com.tw/news/world/breakingnews/997893'
@@ -24,7 +24,7 @@ describe TaiwaneseNewsParser::Parser::LibertyTimesNews do
       article[:content].should include('紐約知名的薩克斯百貨公司')
       article[:company_name].should == '自由時報'
       article[:reporter_name].should == nil
-      article[:published_at].should == Time.new(2014,4,30,10,57)
+      article[:published_at].should == Time.new(2014,4,30,10,57,57)
     end
 
     it do
@@ -35,7 +35,7 @@ describe TaiwaneseNewsParser::Parser::LibertyTimesNews do
       article[:content].should include('又傳酒駕釀禍！花蓮縣壽豐鄉一名男子昨天（28日）在友人家喝得爛醉')
       article[:company_name].should == '自由時報'
       article[:reporter_name].should == nil
-      article[:published_at].should == Time.new(2013,6,29,17,52)
+      article[:published_at].should == Time.new(2013,6,29,17,52,5)
     end
   end
 
